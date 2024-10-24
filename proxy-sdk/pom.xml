@@ -29,7 +29,7 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>com.github.guoyx</groupId>
+            <groupId>io.github.yingxinguo95</groupId>
             <artifactId>proxy-common</artifactId>
             <version>1.0.0-SNAPSHOT</version>
             <scope>compile</scope>
