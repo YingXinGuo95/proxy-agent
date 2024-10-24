@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.yingxinguo95</groupId>
     <artifactId>proxy-agent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>0.0.1-RELEASE</version>
+    <description>Java Agent With Spring Boot</description>
+
     <modules>
         <module>proxy-common</module>
         <module>proxy-core</module>
@@ -15,12 +17,37 @@
     <packaging>pom</packaging>
 
     <properties>
+        <!--use gpg upload to maven central-->
+        <!--<gpg.executable>D:\tools\Gpg4win\..\GnuPG\bin\gpg.exe</gpg.executable>-->
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.7.6</spring-boot.version>
         <spring-cloud.version>2021.0.5</spring-cloud.version>
     </properties>
+
+    <url>https://github.com/YingXinGuo95/proxy-agent</url>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>yingxinguo</name>
+            <email>guoyx.ecit@foxmail.com</email>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:https://github.com/YingXinGuo95/proxy-agent.git</connection>
+        <developerConnection>scm:git:https://github.com/YingXinGuo95/proxy-agent.git</developerConnection>
+        <url>https://github.com/YingXinGuo95/proxy-agent</url>
+    </scm>
+    <issueManagement>
+        <system>github</system>
+        <url>https://github.com/YingXinGuo95/proxy-agent/issues</url>
+    </issueManagement>
 
     <dependencyManagement>
         <dependencies>
@@ -65,15 +92,90 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.sonatype.central</groupId>
-                <artifactId>central-publishing-maven-plugin</artifactId>
-                <version>0.6.0</version>
-                <extensions>true</extensions>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.1.1</version>
+                <inherited>true</inherited>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
-                    <publishingServerId>central</publishingServerId>
+                    <excludeResources>true</excludeResources>
+                    <useDefaultExcludes>true</useDefaultExcludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <inherited>true</inherited>
+                <executions>
+                    <execution>
+                        <id>bundle-sources</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <maxmemory>1024</maxmemory>
+                    <encoding>UTF-8</encoding>
+                    <show>protected</show>
+                    <notree>true</notree>
+                    <!-- Avoid running into Java 8's very restrictive doclint issues -->
+                    <failOnError>false</failOnError>
+                    <aggregate>true</aggregate>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.5</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <gpgArguments>
+                                <!--表示密码直接输入，不需要弹出密码框-->
+                                <arg>--pinentry-mode</arg>
+                                <arg>loopback</arg>
+                            </gpgArguments>
+                        </configuration>
+                    </plugin>
+                    <!-- 配置方式：https://central.sonatype.org/publish/publish-portal-maven/#deploymentname -->
+                    <plugin>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <version>0.6.0</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <publishingServerId>central</publishingServerId>
+                            <!--<autoPublish>true</autoPublish>-->
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
