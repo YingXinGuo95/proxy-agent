@@ -1,2 +1,2 @@
 org.springframework.cloud.bootstrap.BootstrapConfiguration=\
-com.github.guoyx.config.AgentApplicationContextInitializer
+io.github.proxy.config.AgentApplicationContextInitializer
