@@ -215,7 +215,7 @@ public class ReCoderTransformer implements ClassFileTransformer {
             }
 
         } catch (Exception e) {
-            log.info("[proxy-agent] 类方法:[{}]代理失败", srcClass.getName(), e);
+            log.info("[proxy-agent] class:[{}] rewrite byte code failed", srcClass.getName(), e);
         }
     }
 

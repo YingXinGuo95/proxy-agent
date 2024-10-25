@@ -57,7 +57,7 @@ public class AgentMain {
             }
             if (!ins.isModifiableClass(cl) || cl.getName().startsWith("java.") || cl.getName().startsWith("sun.")
                     || cl.isAnonymousClass() || cl.isLocalClass() || cl.isArray() || cl.isInterface() || cl.isEnum()) {
-               log.error("[proxy-agent] 类{} 不允许重写，跳过...", cl.getName());
+               log.error("[proxy-agent] class:{} is not allowed rewrite, skip...", cl.getName());
                continue;
             }
             //重写类字节码
