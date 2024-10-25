@@ -103,8 +103,9 @@ public class TestReCoder implements ProxyReCode {
 ## 需注意
 ### 代理方法的方法签名需要和被代理方法一致，这样才能代理成功
 例如代理方法为org.apache.commons.lang.StringUtils类的isNotEmpty方法
-//原方法 org.apache.commons.lang.StringUtils
-public static boolean isNotEmpty(String str);
+
+        //原方法 org.apache.commons.lang.StringUtils
+        public static boolean isNotEmpty(String str);
 
         //代理方法定义，方法签名与被代理方法保持一致
         @ProxyRecodeCfg(proxyClass=StringUtils.class, method="isNotEmpty")
