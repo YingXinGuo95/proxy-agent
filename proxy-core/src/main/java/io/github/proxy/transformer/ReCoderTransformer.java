@@ -52,7 +52,7 @@ public class ReCoderTransformer implements ClassFileTransformer {
             if (proxyMap == null || proxyMap.isEmpty()) {
                 return null;
             }
-            log.info("[proxy-agent] 开始重写类:[{}]字节码", classBeingRedefined.getName());
+            log.info("[proxy-agent] rewrite class:[{}]", classBeingRedefined.getName());
 
             ClassPool classPool = new ClassPool(true);
             classPool.appendClassPath(new javassist.ClassClassPath(classBeingRedefined));
@@ -77,7 +77,7 @@ public class ReCoderTransformer implements ClassFileTransformer {
             return bytecode;
 
         } catch (Exception e) {
-            log.error("[proxy-agent] 类:[{}]代理异常", classBeingRedefined, e);
+            log.error("[proxy-agent] class:[{}] rewrite byte code failed", classBeingRedefined, e);
 
         } finally {
             Thread.currentThread().setContextClassLoader(originLoader);

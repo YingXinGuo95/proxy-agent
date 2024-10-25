@@ -6,7 +6,7 @@
     <parent>
         <groupId>io.github.yingxinguo95</groupId>
         <artifactId>proxy-agent</artifactId>
-        <version>0.0.1-RELEASE</version>
+        <version>0.0.1</version>
     </parent>
 
     <artifactId>proxy-core</artifactId>
@@ -20,7 +20,7 @@
         <dependency>
             <groupId>io.github.yingxinguo95</groupId>
             <artifactId>proxy-common</artifactId>
-            <version>0.0.1-RELEASE</version>
+            <version>0.0.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

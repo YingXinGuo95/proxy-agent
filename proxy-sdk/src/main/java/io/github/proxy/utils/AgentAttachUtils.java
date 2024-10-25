@@ -13,9 +13,9 @@ import java.nio.file.Files;
 @Slf4j
 public class AgentAttachUtils {
 
-    private static final String AGENT_CLASSPATH = "agent/proxy-core-1.0.0-SNAPSHOT.jar";
+    private static final String AGENT_JAR = "proxy-core-0.0.1.jar";
+    private static final String AGENT_CLASSPATH = "agent/" + AGENT_JAR;
     private static final String AGENT_SAVE_PATH = "/data/agent";
-    private static final String AGENT_JAR = "proxy-core-1.0.0-SNAPSHOT.jar";
 
     public static void attachAgent() {
         try {
@@ -25,10 +25,10 @@ public class AgentAttachUtils {
             String agentPath = saveAgentPath();
 
             loadAgent(pid, agentPath);
-            log.info("load proxy-agent success. cost:{}ms", System.currentTimeMillis() - start);
+            log.info("[proxy-agent] load proxy-agent success. cost:{}ms", System.currentTimeMillis() - start);
 
         } catch (Exception e) {
-            log.error("load proxy-agent failed", e);
+            log.error("[proxy-agent] load proxy-agent failed", e);
 
         }
     }
@@ -47,6 +47,7 @@ public class AgentAttachUtils {
             }
         }
 
+        log.info("[proxy-agent] extract agent jar file to [{}]", savePath);
         return savePath;
     }
 
