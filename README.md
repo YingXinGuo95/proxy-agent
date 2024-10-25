@@ -71,13 +71,13 @@ public class TestReCoder implements ProxyReCode {
     @SneakyThrows
     @ProxyRecodeCfg(proxyClass=TestClass.class, method="methodA", type = ReCodeType.BEFORE)
     public String methodA() {
-	    //获取代理类执行过程中的this对象
-	    Object ref = ProxyReferenceCtx.getRef();
+        //获取代理类执行过程中的this对象
+        Object ref = ProxyReferenceCtx.getRef();
         if (ref.getClass().getName().contains("Test")) {
-		    //返回值不为null，直接返回值，原始方法逻辑不会执行
+            //返回值不为null，直接返回值，原始方法逻辑不会执行
             return "BEFORE";
         }
-		//前置返回null，则继续执行原始方法逻辑
+        //前置返回null，则继续执行原始方法逻辑
         return null;
     }
 }
@@ -89,13 +89,13 @@ public class TestReCoder implements ProxyReCode {
     @SneakyThrows
     @ProxyRecodeCfg(proxyClass=TestClass.class, method="methodA", type = ReCodeType.AFTER)
     public String methodA() {
-	    //获取原始逻辑的返回值
-	    String result = ProxyReferenceCtx.getAfterInvokeResult();
+        //获取原始逻辑的返回值
+        String result = ProxyReferenceCtx.getAfterInvokeResult();
         if (result.equals("A")) {
-		    //返回值不为null，方法执行获取当前返回值
+            //返回值不为null，方法执行获取当前返回值
             return "test after";
         }
-		//返回null，方法执行得到原始逻辑值
+        //返回null，方法执行得到原始逻辑值
         return null;
     }
 }
