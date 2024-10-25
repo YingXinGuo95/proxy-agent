@@ -37,7 +37,7 @@ public class TestReCoder implements ProxyReCode {
 [proxy-agent] redefine loaded class complete, cost:xxxms
 [proxy-agent] load proxy-agent success. cost:xxxms
 ```
-说明字节码重写完成。使用okhttp请求时机会执行重写的逻辑。
+说明字节码重写完成。使用okhttp发起http请求时会执行重写的逻辑，在控制台打印"proxy okhttp"。
 # 功能介绍
 通过类实现ProxyReCode接口，并注册为springBean，这个字节码重写逻辑即可在springBoot启动后自动生效。
 @ProxyRecodeCfg注解标记的方法表示为字节码重写后的逻辑。
