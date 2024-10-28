@@ -132,3 +132,7 @@ public class TestReCoder implements ProxyReCode {
     </configuration>
 </plugin>
 ```
+
+## 启动参数
+- **-Ddebug.saveCodeFile=true** 保存重写后类的class文件至本地磁盘，文件保存在目录/data/agent/code/下，默认关闭；
+- **-DproxyAgent.save.path** agent jar的解压路径，默认/data/agent。
