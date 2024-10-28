@@ -6,7 +6,7 @@ springboot启动时自动加载java agent，使用javassist实现对字节码的
 <dependency>
   <groupId>io.github.yingxinguo95</groupId>
   <artifactId>proxy-sdk</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.2</version>
 </dependency>
 ```
 第二步：定义你自己的字节码重写逻辑，例如以下代码，对okhttp请求前做处理，打印日志信息
