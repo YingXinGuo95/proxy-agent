@@ -36,7 +36,10 @@ public class AgentAttachUtils {
     @SneakyThrows
     private static String saveAgentPath() {
         String dir = System.getProperty("proxyAgent.save.path", AGENT_SAVE_PATH);
-        String savePath = dir + File.separator + AGENT_JAR;
+        String savePath = dir + "/" + AGENT_JAR;
+
+        File folderPath = new File(dir);
+        Files.createDirectories(folderPath.toPath());
 
         try (InputStream inputStream = AgentAttachUtils.class.getClassLoader().getResourceAsStream(AGENT_CLASSPATH);
              OutputStream outputStream = Files.newOutputStream(new File(savePath).toPath())) {
